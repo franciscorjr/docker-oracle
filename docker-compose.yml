@@ -1,0 +1,24 @@
+version: "3.5"
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: ./oracle.Dockerfile
+    ports:
+      - "8000:80"
+    networks:
+      - production-network      
+   
+  oracle-db:
+    image: oracleinanutshell/oracle-xe-11g:latest
+    ports:
+      - 1521:1521
+      - 5500:5500
+      - 8080:8080  
+    networks: 
+      - production-network    
+
+networks:
+  production-network:
+      driver: bridge          
+    
